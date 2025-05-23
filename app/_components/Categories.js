@@ -102,6 +102,7 @@ const Categories = () => {
                   src={category.imgSrc}
                   alt={`${category.name} image`}
                   fill
+                  priority
                   style={{ objectFit: "scale-down" }} // Ensure images cover the div
                 />
               </div>

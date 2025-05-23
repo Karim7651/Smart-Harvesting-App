@@ -8,6 +8,7 @@ import Link from "next/link";
 import HomeIcon from "tabler-icons-react/dist/icons/home";
 import InfoCircleIcon from "tabler-icons-react/dist/icons/info-circle";
 import QuestionMarkIcon from "tabler-icons-react/dist/icons/question-mark";
+import DashBoardIcon from "tabler-icons-react/dist/icons/dashboard";
 import Menu from "tabler-icons-react/dist/icons/menu-2";
 
 export default function Navbar() {
@@ -79,7 +80,15 @@ export default function Navbar() {
             <span className="text-md font-bold ml-4">Homepage</span>
             <span className="absolute inset-0 rounded-md bg-neutral-600 bg-opacity-20 scale-x-0 origin-center transition-transform duration-300 ease-out group-hover:scale-x-100 -z-10"></span>
           </Link>
-
+          <Link
+            href="/dashboard"
+            className="relative flex flex-row items-center p-2 group overflow-hidden"
+            onClick={handleLinkClick}
+          >
+            <DashBoardIcon size={25} />
+            <span className="text-md font-bold ml-4">Dashboard</span>
+            <span className="absolute inset-0 rounded-md bg-neutral-600 bg-opacity-20  scale-x-0 origin-center transition-transform duration-300 ease-out group-hover:scale-x-100 -z-10"></span>
+          </Link>
           <Link
             href="/about"
             className="relative flex flex-row items-center p-2 group overflow-hidden"
@@ -89,7 +98,6 @@ export default function Navbar() {
             <span className="text-md font-bold ml-4">About</span>
             <span className="absolute inset-0 rounded-md bg-neutral-600 bg-opacity-20  scale-x-0 origin-center transition-transform duration-300 ease-out group-hover:scale-x-100 -z-10"></span>
           </Link>
-
           <Link
             href="/faq"
             className="relative flex flex-row items-center p-2 group overflow-hidden"

@@ -6,17 +6,18 @@ import { useUser } from "../_contexts/userContext";
 import { toast } from "sonner";
 export default function SignUpLoginTab() {
   const { setUser } = useUser();
+  const [activeTab, setActiveTab] = useState("login");
   const [formData, setFormData] = useState({
     name: "",
     password: "",
     passwordConfirm: "",
-    mobileNumber: "",
+    // mobileNumber: "",
     email: "",
-    address: "",
+    // address: "",
     loginEmail: "",
     loginPassword: "",
     forgetEmail: "",
-    userType: "customer",
+    // userType: "customer",
   });
   const [isLoading, setIsLoading] = useState(false);
   const [formErrors, setFormErrors] = useState({});
@@ -62,9 +63,9 @@ export default function SignUpLoginTab() {
       errors.passwordConfirm = "Passwords do not match";
     if (!formData.passwordConfirm)
       errors.passwordConfirm = "Confirm password is required";
-    if (!formData.address) errors.address = "Address is required";
-    if (!formData.mobileNumber)
-      errors.mobileNumber = "Mobile number is required";
+    // if (!formData.address) errors.address = "Address is required";
+    // if (!formData.mobileNumber)
+    //   errors.mobileNumber = "Mobile number is required";
     if (Object.keys(errors).length > 0) {
       setFormErrors(errors);
       setIsLoading(false);
@@ -83,8 +84,8 @@ export default function SignUpLoginTab() {
           password: formData.password,
           passwordConfirm: formData.passwordConfirm,
           email: formData.email,
-          address: formData.address,
-          mobileNumber: formData.mobileNumber,
+          // address: formData.address,
+          // mobileNumber: formData.mobileNumber,
         }),
         credentials: "include", // ensure cookies are received
       });
@@ -293,7 +294,7 @@ export default function SignUpLoginTab() {
               )}
             </label>
 
-            <label htmlFor="passwordConfirm" className="mb-2">
+            <label htmlFor="passwordConfirm" className="mb-4">
               <div className="label">
                 <span className="label-text text-md">
                   Confirm your password
@@ -318,7 +319,7 @@ export default function SignUpLoginTab() {
               )}
             </label>
 
-            <label htmlFor="address" className="mb-2">
+            {/* <label htmlFor="address" className="mb-2">
               <div className="label">
                 <span className="label-text text-md">
                   What is your address?
@@ -341,9 +342,9 @@ export default function SignUpLoginTab() {
                   {formErrors.address}
                 </p>
               )}
-            </label>
+            </label> */}
 
-            <label htmlFor="mobileNumber" className="mb-2">
+            {/* <label htmlFor="mobileNumber" className="mb-2">
               <div className="label">
                 <span className="label-text text-md">
                   What is your mobile number?
@@ -366,9 +367,9 @@ export default function SignUpLoginTab() {
                   {formErrors.mobileNumber}
                 </p>
               )}
-            </label>
+            </label> */}
 
-            <label htmlFor="role" className="mb-5">
+            {/* <label htmlFor="role" className="mb-5">
               <div className="label">
                 <span className="label-text text-md">Select your role</span>
               </div>
@@ -383,7 +384,7 @@ export default function SignUpLoginTab() {
                 <option value="customer">Customer</option>
                 <option value="seller">Seller</option>
               </select>
-            </label>
+            </label> */}
 
             <button type="submit" className="btn btn-sm btn-outline">
               {isLoading ? <Loading /> : "Sign Up"}
@@ -419,7 +420,7 @@ export default function SignUpLoginTab() {
               )}
             </label>
 
-            <label htmlFor="loginPassword" className="mb-5">
+            <label htmlFor="loginPassword" className="mb-4">
               <div className="label">
                 <span className="label-text text-md">Enter your password</span>
               </div>
@@ -441,7 +442,7 @@ export default function SignUpLoginTab() {
                 </p>
               )}
             </label>
-            <p className="text-error text-md mb-4">
+            <p className="text-error text-md ">
               {formErrors.credentialsError}
             </p>
 
