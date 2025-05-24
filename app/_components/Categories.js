@@ -83,7 +83,7 @@ const Categories = () => {
 
           return (
             <motion.div
-              className={`flex flex-col font-semibold justify-center items-center ${isFirst ? "ml-8" : ""} ${isLast ? "mr-8" : ""}`}
+              className={`flex flex-col font-semibold gap-4 justify-center items-center ${isFirst ? "ml-8" : ""} ${isLast ? "mr-8" : ""}`}
               key={category.id}
               initial="hidden"
               animate="visible"
