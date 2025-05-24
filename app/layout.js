@@ -42,7 +42,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" data-theme="dark">
       <body
-        className={`${inter.className}   bg-base-100 text-base-content`}
+        className={`${inter.className} bg-base-100 text-base-content`}
       >
         <Toaster richColors />
         <UserProvider>

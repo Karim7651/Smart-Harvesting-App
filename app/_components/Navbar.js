@@ -111,7 +111,7 @@ export default function Navbar() {
 
         {/* Brand Name */}
         <Link href="/" className="btn btn-ghost hover:bg-transparent text-base">
-          Smart & Secure Harvesting AAST
+          Smart Harvesting
         </Link>
       </div>
 
