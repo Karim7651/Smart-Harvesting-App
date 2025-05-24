@@ -76,14 +76,14 @@ const Categories = () => {
       className="relative mb-20 mt-20 w-full overflow-hidden touch-none"
       {...swipeHandlers}
     >
-      <div className="relative flex gap-8 items-center justify-center">
+      <div className="relative flex xs:gap-4 sm:gap-8 items-center justify-center">
         {visibleCategories.map((category, index) => {
           const isFirst = index === 0;
           const isLast = index === visibleCategories.length - 1;
 
           return (
             <motion.div
-              className={`flex flex-col gap-4 font-semibold justify-center items-center ${isFirst ? "ml-8" : ""} ${isLast ? "mr-8" : ""}`}
+              className={`flex flex-col font-semibold justify-center items-center ${isFirst ? "ml-8" : ""} ${isLast ? "mr-8" : ""}`}
               key={category.id}
               initial="hidden"
               animate="visible"
@@ -91,7 +91,7 @@ const Categories = () => {
               variants={variants}
             >
               <div
-                className="flex-shrink-0 relative 2xl:h-48 2xl:w-48 lg:w-40 lg:h-40 md:w-36 md:h-36 sm:h-32 sm:w-32 xs:h-28 xs:w-16 bg-base-200 rounded-full shadow-lg"
+                className="flex-shrink-0 relative 2xl:h-48 2xl:w-48 lg:w-40 lg:h-40 md:w-36 md:h-36 sm:h-32 sm:w-32 xs:h-[4rem] xs:w-[4rem] bg-base-200 rounded-full shadow-lg"
                 style={{ borderRadius: "70% 30% 81% 19% / 21% 72% 28% 79%" }}
               >
                 <Image
