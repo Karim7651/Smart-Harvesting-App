@@ -66,9 +66,9 @@ const Carousel = () => {
   const handleTouchEnd = () => {
     const distance = currentX - startX;
 
-    if (distance < -250 && activeIndex < images.length - 1) {
+    if (distance < -100 && activeIndex < images.length - 1) {
       nextSlide(); // Swipe left
-    } else if (distance > 250 && activeIndex > 0) {
+    } else if (distance > 100 && activeIndex > 0) {
       prevSlide(); // Swipe right
     }
 
