@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Loading from "../_components/Loading";
 import { useUser } from "../_contexts/userContext";
 import SensorReadings from "../_components/SensorReadings";
+import SkeletonDashboardChart from "../_components/SkeletonDashboard";
 
 export default function Dashboard() {
   const { user, loading } = useUser();
@@ -19,7 +20,7 @@ export default function Dashboard() {
         const responses = await Promise.all(
           user.farms.map(async (farmId) => {
             const res = await fetch(
-              `${process.env.NEXT_PUBLIC_API}/farms/${farmId}/sensorReadings?sort=timestamp&page=${pageNumber}&limit=4`,
+              `${process.env.NEXT_PUBLIC_API}/farms/${farmId}/sensorReadings?sort=-timestamp&page=${pageNumber}&limit=4`,
               {
                 method: "GET",
                 credentials: "include",
@@ -65,7 +66,7 @@ export default function Dashboard() {
     fetchSensorData();
   }, [user, pageNumber]);
 
-  if (loading || fetching) return <Loading />;
+  if (loading || fetching) return <SkeletonDashboardChart />;
 
   if (!user) {
     return (

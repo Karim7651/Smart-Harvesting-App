@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import {
   Pagination,
   PaginationContent,
@@ -8,7 +9,89 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 
-export default function PaginationDemo({ totalPages, currentPage = 1, setPageNumber }) {
+function EllipsisInput({ setPageNumber, totalPages }) {
+  const [isHovered, setIsHovered] = useState(false);
+  const [inputValue, setInputValue] = useState("");
+  const [showInput, setShowInput] = useState(false);
+
+  // Control delayed mount/unmount for animation
+  useEffect(() => {
+    if (isHovered) {
+      setShowInput(true);
+    } else {
+      // Delay hiding for animation
+      const timeout = setTimeout(() => setShowInput(false), 500);
+      return () => clearTimeout(timeout);
+    }
+  }, [isHovered]);
+
+  const onChange = (e) => {
+    if (/^\d*$/.test(e.target.value)) setInputValue(e.target.value);
+  };
+
+  const onKeyDown = (e) => {
+    if (e.key === "Enter") {
+      const num = Number(inputValue);
+      if (num >= 1 && num <= totalPages) {
+        setPageNumber(num);
+        setInputValue("");
+        setIsHovered(false);
+      }
+    } else if (e.key === "Escape") {
+      setInputValue("");
+      setIsHovered(false);
+    }
+  };
+
+  const onBlur = () => {
+    setInputValue("");
+    setIsHovered(false);
+  };
+
+  return (
+    <div
+      className="w-12 h-8 flex items-center justify-center cursor-pointer relative"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => {
+        if (!inputValue) setIsHovered(false);
+      }}
+    >
+      {/* Ellipsis */}
+      <span
+        className={`select-none absolute transition-opacity duration-500 ${
+          isHovered ? "opacity-0 scale-90" : "opacity-100 scale-100"
+        }`}
+        style={{ pointerEvents: isHovered ? "none" : "auto" }}
+      >
+        ...
+      </span>
+
+      {/* Input */}
+      {showInput && (
+        <input
+          autoFocus
+          type="text"
+          value={inputValue}
+          onChange={onChange}
+          onKeyDown={onKeyDown}
+          onBlur={onBlur}
+          placeholder="Page"
+          className={`w-full h-7 m-x text-center border rounded text-sm 
+  absolute transition-opacity duration-500
+  ${isHovered ? "opacity-100 " : "opacity-0 "}
+`}
+          style={{ top: 0, left: 0 }}
+        />
+      )}
+    </div>
+  );
+}
+
+export default function PaginationDemo({
+  totalPages,
+  currentPage = 1,
+  setPageNumber,
+}) {
   const getPages = () => {
     const pages = [];
 
@@ -50,7 +133,10 @@ export default function PaginationDemo({ totalPages, currentPage = 1, setPageNum
         {pages.map((page, i) =>
           page === "..." ? (
             <PaginationItem key={i}>
-              <PaginationEllipsis />
+              <EllipsisInput
+                setPageNumber={setPageNumber}
+                totalPages={totalPages}
+              />
             </PaginationItem>
           ) : (
             <PaginationItem key={i}>
@@ -81,7 +167,3 @@ export default function PaginationDemo({ totalPages, currentPage = 1, setPageNum
     </Pagination>
   );
 }
-
-
-
-
