@@ -76,6 +76,20 @@ const CustomTooltip = ({ active, payload }) => {
   return null;
 };
 
+// ✅ Custom label renderers for each category
+const renderCategoryLabel = (label) => ({ x, y, width }) => (
+  <text
+    x={x + width / 2}
+    y={y - 10}
+    textAnchor="middle"
+    fill="#000"
+    fontSize={20}
+    fontWeight="bold"
+  >
+    {label}
+  </text>
+);
+
 export default function GroupedBarChart({ data }) {
   const transformedData = data.map((d) => ({
     ...d,
@@ -87,11 +101,11 @@ export default function GroupedBarChart({ data }) {
       <ResponsiveContainer>
         <BarChart
           data={transformedData}
-          margin={{ top: 50, right: 60, left: 0, bottom: 60 }}
-          barCategoryGap="20%" // space between groups
-          barGap={10} // space between bars in group
+          margin={{ top: 10, right: 60, left: 0, bottom: 60 }}
+          barCategoryGap="30%"
+          barGap={10}
         >
-          <CartesianGrid stroke="#000000" strokeDasharray="10 10" />
+          <CartesianGrid stroke="#000000" strokeDasharray="3 3" />
 
           <XAxis
             dataKey="dateTimeString"
@@ -119,23 +133,23 @@ export default function GroupedBarChart({ data }) {
           <Bar
             dataKey="moisture"
             fill="#5a7aaf"
-            activeBar={
-              <Rectangle fill="#39527a" stroke="#000000" strokeWidth={2} />
-            }
+            activeBar={<Rectangle fill="#39527a" stroke="#000000" strokeWidth={2} />}
+            barSize={100}
+            label={renderCategoryLabel("M")}
           />
           <Bar
             dataKey="temperature"
             fill="#d67373"
-            activeBar={
-              <Rectangle fill="#a94f4f" stroke="#000000" strokeWidth={2} />
-            }
+            activeBar={<Rectangle fill="#a94f4f" stroke="#000000" strokeWidth={2} />}
+            barSize={100}
+            label={renderCategoryLabel("T")}
           />
           <Bar
             dataKey="humidity"
             fill="#6bb76b"
-            activeBar={
-              <Rectangle fill="#4b744b" stroke="#000000" strokeWidth={2} />
-            }
+            activeBar={<Rectangle fill="#4b744b" stroke="#000000" strokeWidth={2} />}
+            barSize={100}
+            label={renderCategoryLabel("H")}
           />
         </BarChart>
       </ResponsiveContainer>
