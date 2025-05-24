@@ -91,7 +91,7 @@ const Carousel = () => {
 
   return (
     <header
-      className="relative mt-20 overflow-hidden"
+      className="relative mt-20 overflow-hidden mx-10"
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
