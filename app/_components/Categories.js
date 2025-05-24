@@ -91,7 +91,7 @@ const Categories = () => {
               variants={variants}
             >
               <div
-                className="flex-shrink-0 relative 2xl:h-48 2xl:w-48 lg:w-40 lg:h-40 md:w-36 md:h-36 sm:h-32 sm:w-32 xs:h-28 xs:w-28 bg-base-200 rounded-full shadow-lg"
+                className="flex-shrink-0 relative 2xl:h-48 2xl:w-48 lg:w-40 lg:h-40 md:w-36 md:h-36 sm:h-32 sm:w-32 xs:h-28 xs:w-16 bg-base-200 rounded-full shadow-lg"
                 style={{ borderRadius: "70% 30% 81% 19% / 21% 72% 28% 79%" }}
               >
                 <Image
