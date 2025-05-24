@@ -33,7 +33,7 @@ const faqs = [
   
   function Accordion() {
     return (
-      <div className="join join-vertical w-[60%]">
+      <div className="join join-vertical w-[90%]">
         {faqs.map((faq, index) => (
           <div
             key={index}

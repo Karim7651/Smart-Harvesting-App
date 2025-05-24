@@ -70,7 +70,7 @@ export default function Dashboard() {
 
   if (!user) {
     return (
-      <main className="h-svh flex items-center justify-center mx-auto flex-col">
+      <main className="h-svh flex items-center justify-center mx-auto flex-col  text-center">
         <h2 className="text-3xl font-bold text-base-content select-none">
           Login | Sign Up to view the dashboard
         </h2>
