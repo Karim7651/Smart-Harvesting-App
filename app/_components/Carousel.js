@@ -115,7 +115,6 @@ const Carousel = () => {
               width={1200}
               height={400}
               priority
-              className=" shadow-lg"
               style={{
                 borderRadius: "93% 7% 93% 7% / 8% 95% 5% 92%",
               }}
