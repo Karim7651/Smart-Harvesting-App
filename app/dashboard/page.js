@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Loading from "../_components/Loading";
 import { useUser } from "../_contexts/userContext";
 import SensorReadings from "../_components/SensorReadings";
-import SkeletonDashboardChart from "../_components/SkeletonDashboard";
+import SkeletonDashboard from "../_components/SkeletonDashboard";
 
 export default function Dashboard() {
   const { user, loading } = useUser();
