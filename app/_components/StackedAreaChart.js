@@ -83,7 +83,7 @@ const renderCategoryLabel = (label) => ({ x, y, width }) => (
     y={y - 10}
     textAnchor="middle"
     fill="#000"
-    fontSize={20}
+    fontSize={15}
     fontWeight="bold"
   >
     {label}
