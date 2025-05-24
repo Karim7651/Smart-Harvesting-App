@@ -4,7 +4,7 @@ import Image from "next/image";
 
 // Array of images
 const images = [
-  { src: `${process.env.NEXT_PUBLIC_GALLERY}car-3.jpg`, alt: "Image 2" },
+  { src: `${process.env.NEXT_PUBLIC_GALLERY}car-3.jpg`, alt: "Image 1" },
   { src: `${process.env.NEXT_PUBLIC_GALLERY}car-2.jpg`, alt: "Image 2" }
 ];
 
@@ -15,21 +15,28 @@ const Carousel = () => {
   const [isSwiping, setIsSwiping] = useState(false);
   const [transitionDuration, setTransitionDuration] = useState(500);
   const intervalRef = useRef(null);
-  const startYRef = useRef(0);
+  const containerRef = useRef(null);
 
+  // Function to reset interval
   const resetInterval = () => {
-    if (intervalRef.current) clearInterval(intervalRef.current);
-    if (!isSwiping) intervalRef.current = setInterval(nextSlide, 3500);
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+    if (!isSwiping) {
+      intervalRef.current = setInterval(nextSlide, 3500);
+    }
   };
 
   const nextSlide = () => {
-    setActiveIndex((prev) => (prev + 1) % images.length);
+    setActiveIndex((prevIndex) => (prevIndex + 1) % images.length);
     setTransitionDuration(500);
     resetInterval();
   };
 
   const prevSlide = () => {
-    setActiveIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+    setActiveIndex((prevIndex) =>
+      prevIndex === 0 ? images.length - 1 : prevIndex - 1
+    );
     setTransitionDuration(500);
     resetInterval();
   };
@@ -39,9 +46,9 @@ const Carousel = () => {
     return () => clearInterval(intervalRef.current);
   }, [isSwiping]);
 
+  // Touch handlers (native events)
   const handleTouchStart = (e) => {
     setStartX(e.touches[0].clientX);
-    startYRef.current = e.touches[0].clientY;
     setCurrentX(e.touches[0].clientX);
     setIsSwiping(true);
     setTransitionDuration(0);
@@ -52,31 +59,44 @@ const Carousel = () => {
     if (!isSwiping) return;
 
     const touchX = e.touches[0].clientX;
-    const touchY = e.touches[0].clientY;
+    setCurrentX(touchX);
 
-    const dx = touchX - startX;
-    const dy = touchY - startYRef.current;
-
-    if (Math.abs(dx) > Math.abs(dy)) {
-      e.preventDefault();
-      setCurrentX(touchX);
-    }
+    // Prevent page scrolling while swiping the carousel
+    e.preventDefault();
   };
 
   const handleTouchEnd = () => {
     const distance = currentX - startX;
 
-    if (distance < -50 && activeIndex < images.length - 1) nextSlide();
-    else if (distance > 50 && activeIndex > 0) prevSlide();
+    if (distance < -50 && activeIndex < images.length - 1) {
+      nextSlide(); // Swipe left
+    } else if (distance > 50 && activeIndex > 0) {
+      prevSlide(); // Swipe right
+    }
 
     setIsSwiping(false);
     setCurrentX(0);
     setTransitionDuration(500);
   };
 
+  // Attach native listeners with passive:false
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    el.addEventListener("touchstart", handleTouchStart, { passive: false });
+    el.addEventListener("touchmove", handleTouchMove, { passive: false });
+    el.addEventListener("touchend", handleTouchEnd, { passive: false });
+
+    return () => {
+      el.removeEventListener("touchstart", handleTouchStart);
+      el.removeEventListener("touchmove", handleTouchMove);
+      el.removeEventListener("touchend", handleTouchEnd);
+    };
+  }, [isSwiping, startX, currentX, activeIndex]); // dependencies to update handlers if needed
+
   const translateX =
-    activeIndex * -100 +
-    (isSwiping ? ((currentX - startX) / window.innerWidth) * 100 : 0);
+    activeIndex * -100 + (isSwiping ? ((currentX - startX) / window.innerWidth) * 100 : 0);
 
   const finalTranslateX = Math.max(
     Math.min(translateX, 0),
@@ -85,11 +105,8 @@ const Carousel = () => {
 
   return (
     <header
+      ref={containerRef}
       className="relative mt-20 overflow-hidden mx-10"
-      style={{ touchAction: "pan-y" }}
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
     >
       <div
         className="relative flex"
@@ -117,10 +134,11 @@ const Carousel = () => {
         ))}
       </div>
 
+      {/* Prev button */}
       {activeIndex > 0 && (
         <button
           onClick={prevSlide}
-          className="absolute top-1/2 left-8 active:scale-75 -translate-y-1/2 bg-white/50 p-2 rounded-full focus:outline-none hover:bg-gray-200 transform transition-transform duration-300 ease-out hidden lg:block"
+          className="absolute top-1/2 left-8 active:scale-75 -translate-y-1/2 bg-white/50 p-2 rounded-full focus:outline-none hover:bg-gray-200 hidden lg:block transition-transform duration-300 ease-out"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -135,10 +153,11 @@ const Carousel = () => {
         </button>
       )}
 
+      {/* Next button */}
       {activeIndex < images.length - 1 && (
         <button
           onClick={nextSlide}
-          className="absolute top-1/2 right-8 active:scale-75 -translate-y-1/2 bg-white/50 p-2 rounded-full focus:outline-none hover:bg-gray-200 transform transition-transform duration-300 ease-out hidden lg:block"
+          className="absolute top-1/2 right-8 active:scale-75 -translate-y-1/2 bg-white/50 p-2 rounded-full focus:outline-none hover:bg-gray-200 hidden lg:block transition-transform duration-300 ease-out"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -153,6 +172,7 @@ const Carousel = () => {
         </button>
       )}
 
+      {/* Indicators */}
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex items-center space-x-2">
         {images.map((_, index) => (
           <div
