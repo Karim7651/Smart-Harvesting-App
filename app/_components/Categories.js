@@ -56,7 +56,7 @@ const Categories = () => {
   const swipeHandlers = useSwipeable({
     onSwipedLeft: handleNext,
     onSwipedRight: handlePrev,
-    preventDefaultTouchmoveEvent: true,
+    preventScrollOnSwipe: true,
     trackMouse: true,
   });
 
@@ -73,7 +73,7 @@ const Categories = () => {
 
   return (
     <div
-      className="relative mb-20 mt-20 w-full overflow-hidden"
+      className="relative mb-20 mt-20 w-full overflow-hidden touch-none"
       {...swipeHandlers}
     >
       <div className="relative flex gap-8 items-center justify-center">
@@ -83,9 +83,7 @@ const Categories = () => {
 
           return (
             <motion.div
-              className={`flex flex-col gap-4 font-semibold justify-center items-center ${
-                isFirst ? "ml-8" : ""
-              } ${isLast ? "mr-8" : ""}`}
+              className={`flex flex-col gap-4 font-semibold justify-center items-center ${isFirst ? "ml-8" : ""} ${isLast ? "mr-8" : ""}`}
               key={category.id}
               initial="hidden"
               animate="visible"
@@ -112,7 +110,6 @@ const Categories = () => {
         })}
       </div>
 
-      {/* Prev Button */}
       {currentIndex > 0 && (
         <button
           onClick={handlePrev}
@@ -135,7 +132,6 @@ const Categories = () => {
         </button>
       )}
 
-      {/* Next Button */}
       {currentIndex + visibleItems < categories.length && (
         <button
           onClick={handleNext}
