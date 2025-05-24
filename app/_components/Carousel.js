@@ -61,7 +61,7 @@ const Carousel = () => {
     const touchX = e.touches[0].clientX;
     setCurrentX(touchX);
 
-    // Prevent page scrolling while swiping the carousel
+    //prevent horizontal scrolling while on carousel
     e.preventDefault();
   };
 
