@@ -66,7 +66,7 @@ export default function Dashboard() {
     fetchSensorData();
   }, [user, pageNumber]);
 
-  if (loading || fetching) return <SkeletonDashboardChart />;
+  if (loading || fetching) return <SkeletonDashboard />;
 
   if (!user) {
     return (
