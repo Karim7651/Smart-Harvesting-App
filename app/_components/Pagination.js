@@ -14,12 +14,10 @@ function EllipsisInput({ setPageNumber, totalPages }) {
   const [inputValue, setInputValue] = useState("");
   const [showInput, setShowInput] = useState(false);
 
-  // Control delayed mount/unmount for animation
   useEffect(() => {
     if (isHovered) {
       setShowInput(true);
     } else {
-      // Delay hiding for animation
       const timeout = setTimeout(() => setShowInput(false), 500);
       return () => clearTimeout(timeout);
     }
@@ -50,7 +48,7 @@ function EllipsisInput({ setPageNumber, totalPages }) {
 
   return (
     <div
-      className="w-12 h-8 flex items-center justify-center cursor-pointer relative"
+      className="w-12 h-8 flex items-center justify-center cursor-pointer relative flex-wrap"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => {
         if (!inputValue) setIsHovered(false);
@@ -59,7 +57,7 @@ function EllipsisInput({ setPageNumber, totalPages }) {
       {/* Ellipsis */}
       <span
         className={`select-none absolute transition-opacity duration-500 ${
-          isHovered ? "opacity-0 scale-90" : "opacity-100 scale-100"
+          isHovered ? "opacity-0 scale-" : "opacity-100 scale-100"
         }`}
         style={{ pointerEvents: isHovered ? "none" : "auto" }}
       >
@@ -76,10 +74,9 @@ function EllipsisInput({ setPageNumber, totalPages }) {
           onKeyDown={onKeyDown}
           onBlur={onBlur}
           placeholder="Page"
-          className={`w-full h-7 m-x text-center border rounded text-sm 
+          className={`w-full h-7 mx text-center border rounded text-xs 
   absolute transition-opacity duration-500
-  ${isHovered ? "opacity-100 " : "opacity-0 "}
-`}
+  ${isHovered ? "opacity-100 " : "opacity-0 "}`}
           style={{ top: 0, left: 0 }}
         />
       )}
@@ -119,7 +116,7 @@ export default function PaginationDemo({
 
   return (
     <Pagination className="mb-16">
-      <PaginationContent>
+      <PaginationContent className="flex flex-wrap gap-1">
         <PaginationItem>
           <PaginationPrevious
             href="#"
@@ -133,10 +130,7 @@ export default function PaginationDemo({
         {pages.map((page, i) =>
           page === "..." ? (
             <PaginationItem key={i}>
-              <EllipsisInput
-                setPageNumber={setPageNumber}
-                totalPages={totalPages}
-              />
+              <EllipsisInput setPageNumber={setPageNumber} totalPages={totalPages} />
             </PaginationItem>
           ) : (
             <PaginationItem key={i}>

@@ -59,7 +59,6 @@ const plans = [
   },
 ];
 
-
 const containerVariants = {
   hidden: {},
   visible: {
@@ -76,15 +75,19 @@ const cardVariants = {
     y: 0,
     scale: 1,
     rotateY: 0,
-    transition: { duration: 0.7},
+    transition: { duration: 0.5 },
   },
 };
 export default function CardSubscribeList() {
   const controls = useAnimation();
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.2 });
+  const [ref, inView] = useInView({ triggerOnce: false, threshold: 0.1 });
 
   useEffect(() => {
-    if (inView) controls.start("visible");
+    if (inView) {
+      controls.start("visible");
+    } else {
+      controls.start("hidden"); // re-triggers animation every time it scrolls in
+    }
   }, [controls, inView]);
 
   return (

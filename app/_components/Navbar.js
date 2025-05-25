@@ -89,7 +89,7 @@ export default function Navbar() {
             <span className="text-md font-bold ml-4">Dashboard</span>
             <span className="absolute inset-0 rounded-md bg-neutral-600 bg-opacity-20  scale-x-0 origin-center transition-transform duration-300 ease-out group-hover:scale-x-100 -z-10"></span>
           </Link>
-          <Link
+          {/* <Link
             href="/about"
             className="relative flex flex-row items-center p-2 group overflow-hidden"
             onClick={handleLinkClick}
@@ -97,7 +97,7 @@ export default function Navbar() {
             <InfoCircleIcon size={25} />
             <span className="text-md font-bold ml-4">About</span>
             <span className="absolute inset-0 rounded-md bg-neutral-600 bg-opacity-20  scale-x-0 origin-center transition-transform duration-300 ease-out group-hover:scale-x-100 -z-10"></span>
-          </Link>
+          </Link> */}
           <Link
             href="/faq"
             className="relative flex flex-row items-center p-2 group overflow-hidden"
