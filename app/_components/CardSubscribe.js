@@ -6,7 +6,7 @@ const CardSubscribe = ({
   disabledFeatures = [],
 }) => {
   return (
-    <div className="card w-96 bg-base-200 shadow-sm">
+    <div className="card w-96 bg-base-200 shadow-sm ">
       <div className="card-body">
         {badge && <span className="badge badge-xs badge-warning">{badge}</span>}
         <div className="flex justify-between">

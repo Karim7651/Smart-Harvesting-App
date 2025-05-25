@@ -5,7 +5,7 @@ import Image from "next/image";
 // Array of images
 const images = [
   { src: `${process.env.NEXT_PUBLIC_GALLERY}car-3.jpg`, alt: "Image 1" },
-  { src: `${process.env.NEXT_PUBLIC_GALLERY}car-2.jpg`, alt: "Image 2" }
+  { src: `${process.env.NEXT_PUBLIC_GALLERY}car-2.jpg`, alt: "Image 2" },
 ];
 
 const Carousel = () => {
@@ -96,7 +96,8 @@ const Carousel = () => {
   }, [isSwiping, startX, currentX, activeIndex]); // dependencies to update handlers if needed
 
   const translateX =
-    activeIndex * -100 + (isSwiping ? ((currentX - startX) / window.innerWidth) * 100 : 0);
+    activeIndex * -100 +
+    (isSwiping ? ((currentX - startX) / window.innerWidth) * 100 : 0);
 
   const finalTranslateX = Math.max(
     Math.min(translateX, 0),
@@ -104,10 +105,7 @@ const Carousel = () => {
   );
 
   return (
-    <header
-      ref={containerRef}
-      className="relative mt-20 overflow-hidden mx-10"
-    >
+    <header ref={containerRef} className="relative mt-20 overflow-hidden mx-5">
       <div
         className="relative flex"
         style={{
@@ -148,7 +146,11 @@ const Carousel = () => {
             stroke="currentColor"
             className="w-6 h-6 text-gray-800"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15 19l-7-7 7-7"
+            />
           </svg>
         </button>
       )}
@@ -167,7 +169,11 @@ const Carousel = () => {
             stroke="currentColor"
             className="w-6 h-6 text-gray-800"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M9 5l7 7-7 7"
+            />
           </svg>
         </button>
       )}
