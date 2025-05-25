@@ -70,7 +70,7 @@ export default function Dashboard() {
 
   if (!user) {
     return (
-      <main className="h-svh flex items-center justify-center mx-auto flex-col  text-center">
+      <main className="h-svh flex items-center justify-center mx-auto flex-col text-center min-h-[80svh] ">
         <h2 className="text-3xl font-bold text-base-content select-none">
           Login | Sign Up to view the dashboard
         </h2>
@@ -83,7 +83,7 @@ export default function Dashboard() {
 
   return (
     <div className="mt-20">
-      <h1 className="text-4xl font-semibold mb-6 text-center">Dashboard</h1>
+      <h1 className="text-4xl font-semibold mb-6 text-center ">Dashboard</h1>
       <SensorReadings data={readings} setPageNumber={setPageNumber} pageNumber={pageNumber} />
     </div>
   );

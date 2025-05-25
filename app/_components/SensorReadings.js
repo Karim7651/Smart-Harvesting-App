@@ -3,7 +3,7 @@ import StackedAreaChart from "./StackedAreaChart";
 import Pagination from "./Pagination";
 export default function SensorReadings({ data, setPageNumber,pageNumber }) {
   return (
-    <div className="grid grid-cols-1 gap-6 p-8 h-auto">
+    <div className="grid grid-cols-1 gap-6 p-8 h-auto ">
       {data.map((farmData, index) => (
         <div key={index} className="bg-base-200 p-4 rounded-xl shadow-md">
           <h2 className="text-2xl font-bold mb-4 mt-2 text-center">
